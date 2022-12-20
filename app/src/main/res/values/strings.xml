@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Twenty one days</string>
+    <string name="reset">reset</string>
+    <string name="subtitle">day(s) with new habit</string>
+</resources>
