@@ -1,5 +1,7 @@
 package com.zareckii.twentyonedays
 
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -35,7 +37,7 @@ private class FakeRepository(private val days: Int) : MainRepository {
     override fun days(): Int = days
 }
 
-interface FakeMainCommunications : MainCommunication.Put {
+private interface FakeMainCommunications : MainCommunication.Mutable<UiState> {
 
     fun checkCalledCount(count: Int): Boolean
     fun isSame(uiState: UiState): Boolean
@@ -52,5 +54,7 @@ interface FakeMainCommunications : MainCommunication.Put {
             callCount++
             state = value
         }
+
+        override fun observe(owner: LifecycleOwner, observer: Observer<UiState>) = Unit
     }
 }
