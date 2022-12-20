@@ -1,5 +1,8 @@
 package com.zareckii.twentyonedays
 
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -28,11 +31,19 @@ class MainViewModel(
 
 sealed class UiState {
 
+    abstract fun apply(daysTestView: TextView, resetButton: Button )
     object ZeroDays : UiState() {
-
+        override fun apply(daysTestView: TextView, resetButton: Button) {
+            daysTestView.text = "0"
+            resetButton.visibility = View.GONE
+        }
     }
 
     data class NDays(private val days: Int) : UiState() {
+        override fun apply(daysTestView: TextView, resetButton: Button) {
+            daysTestView.text = days.toString()
+            resetButton.visibility = View.VISIBLE
+        }
 
     }
 
